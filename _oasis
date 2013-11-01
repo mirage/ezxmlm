@@ -1,0 +1,14 @@
+OASISFormat: 0.3
+Name:        ezxmlm
+Version:     1.0.0
+Synopsis:    A tree-based interface on top of XMLM
+Authors:     Anil Madhavapeddy
+License:     ISC
+Plugins:     META (0.3), DevFiles (0.3)
+BuildTools:  ocamlbuild
+
+Library ezxmlm
+  Path: lib
+  Findlibname: ezxmlm
+  Modules: Ezxmlm
+  BuildDepends:	xmlm

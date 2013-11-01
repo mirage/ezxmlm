@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 89746a30e2be95ae179f3a5f05497cbd)
+version = "1.0.0"
+description = "A tree-based interface on top of XMLM"
+requires = "xmlm"
+archive(byte) = "ezxmlm.cma"
+archive(byte, plugin) = "ezxmlm.cma"
+archive(native) = "ezxmlm.cmxa"
+archive(native, plugin) = "ezxmlm.cmxs"
+exists_if = "ezxmlm.cma"
+# OASIS_STOP
+
