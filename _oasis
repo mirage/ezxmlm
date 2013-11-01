@@ -12,3 +12,11 @@ Library ezxmlm
   Findlibname: ezxmlm
   Modules: Ezxmlm
   BuildDepends:	xmlm
+
+Document ezxmlm
+  Title:                Ezxmlm docs
+  Type:                 ocamlbuild (0.3)
+  BuildTools+:          ocamldoc
+  Install:              true
+  XOCamlbuildPath:      lib
+  XOCamlbuildLibraries: ezxmlm

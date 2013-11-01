@@ -17,3 +17,4 @@
 "lib/ezxmlm.cmxs": use_ezxmlm
 <lib/*.ml{,i}>: pkg_xmlm
 # OASIS_STOP
+true: debug, annot, bin_annot, short_paths, principal
