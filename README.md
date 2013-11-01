@@ -9,7 +9,8 @@ directly, rather than be saddled with the Ezxmlm interface.
 # Example
 
 In the toplevel, here's an example of how some XHTML can be selected out
-quickly using the Ezxmlm combinators.
+quickly using the Ezxmlm combinators.  Note that this particular HTML has
+been post-processed into valid XML using `xmllint --html --xmlout`.
 
 ```
 # #require "ezxmlm" ;;
