@@ -32,6 +32,9 @@ type node = ('a Xmlm.frag as 'a) Xmlm.frag
 (** The type of a list of XML tags *)
 type nodes = node list
 
+(** Raised by the query combinators *)
+exception Tag_not_found of string
+
 (**  {1 Reading XML values } *)
 
 (** Read an XML document from an [in_channel] *)
@@ -60,9 +63,33 @@ val to_output : Xmlm.output -> Xmlm.dtd * node -> unit
 (** Make a tag given a [tag] name and body [nodes] and an optional attribute list *)
 val mk_tag : ?attrs:(string * string) list -> tag:string -> nodes -> node
 
+(** Convert a list of [`Data] fragments to a human-readable string.  Any elements
+    within the list are ignored, and multiple [`Data] fragments are concatenated. *)
+val data_to_string : nodes -> string
+
+(** Extracts the immediate subnodes that match the given [tag] name and return
+    a tuple of the attributes associated with that tag and its child nodes. *)
+val members_with_attr : string -> nodes -> (Xmlm.attribute list * nodes) list
+
+(** Extracts the immediate subnodes that match the given [tag] name, and only return
+    the contents of those tags (ignoring the attributes, which can be retrieved via
+    the [members_with_attr] function *)
+val members : string -> nodes -> nodes list
+
+(** Extracts the first subnode that match the given [tag] name, and raises
+    [Tag_not_found] if it can't find it. *)
+val member_with_attr : string -> nodes -> Xmlm.attribute list * nodes
+
+(** Extracts the first subnode that match the given [tag] name, and raises
+    [Tag_not_found] if it can't find it. Only the contents of the tag are
+    returned (ignoring the attributes, which can be retrieved via the
+    [member_with_attr] function instead *)
+val member : string -> nodes -> nodes
+
 (** Traverses XML nodes and applies [f] to any tags that match the [tag] parameter.
     The result of the transformations is returned as a new set of nodes. *)
-val filter_map  : tag:string -> f:(Xmlm.attribute list -> nodes -> nodes) -> nodes -> nodes
+val filter_map : tag:string -> f:(Xmlm.attribute list -> nodes -> nodes) -> nodes -> nodes
 
 (** Traverses XML nodes and applies [f] to any tags that match the [tag] parameter. *)
 val filter_iter : tag:string -> f:(Xmlm.attribute list -> nodes -> unit) -> nodes -> unit
+

@@ -68,7 +68,7 @@ let rec filter_map ~tag ~f i =
   List.concat (
     List.map (
       function
-      | `El ((("",t),attr),c) when t=tag -> f attr c
+      | `El (((_,t),attr),c) when t=tag -> f attr c
       | `El (p,c) -> [`El (p, (filter_map ~tag ~f c))]
       | `Data x -> [`Data x]
     ) i
@@ -77,7 +77,35 @@ let rec filter_map ~tag ~f i =
 let rec filter_iter ~tag ~f i =
   List.iter (
     function
-    | `El ((("",t),attr),c) when t=tag -> f attr c
+    | `El (((_,t),attr),c) when t=tag -> f attr c
     | `El (_,c) -> filter_iter ~tag ~f c
     | `Data _ -> ()
   ) i
+
+exception Tag_not_found of string
+
+let members_with_attr tag nodes =
+  List.fold_left (fun a b ->
+    match b with
+    | `El (((_,t),attr),c) when t=tag -> (attr,c) :: a
+    | _ -> a
+  ) [] nodes
+
+let member_with_attr tag nodes =
+  match members_with_attr tag nodes with
+  | [] -> raise (Tag_not_found tag)
+  | hd::_ -> hd
+
+let members tag nodes =
+  List.map snd (members_with_attr tag nodes)
+
+let member tag nodes =
+  snd (member_with_attr tag nodes)
+
+let data_to_string nodes =
+  let buf = Buffer.create 512 in
+  List.iter (function
+    | `Data x -> Buffer.add_string buf x
+    | _ -> ()
+  ) nodes;
+  Buffer.contents buf
