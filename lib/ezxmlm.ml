@@ -54,15 +54,25 @@ let write_document mode dtd doc =
 let to_channel chan dtd doc =
   write_document (`Channel chan) dtd doc
 
-let to_string dtd doc =
+let to_string ?dtd doc =
   let buf = Buffer.create 512 in
   write_document (`Buffer buf) dtd doc;
   Buffer.contents buf
 
-let mk_tag ?(attrs=[]) ~tag (contents:nodes) : node =
+let make_tag' ?(attrs=[]) ~tag (contents:nodes) : node =
   let attrs = List.map (fun (k,v) -> ("",k),v) attrs in
   let tag = ("", tag), attrs in
   `El (tag, contents)
+
+let make_tag tag (attrs,nodes) : node =
+  `El ((("",tag),attrs),nodes)
+
+let mem_attr k v attrs =
+  try List.assoc ("",k) attrs = v
+  with Not_found -> false
+
+let get_attr k attrs =
+  List.assoc ("",k) attrs
 
 let rec filter_map ~tag ~f i =
   List.concat (
@@ -82,14 +92,34 @@ let rec filter_iter ~tag ~f i =
     | `Data _ -> ()
   ) i
 
+let filter_attrs attr value (al:(Xmlm.attribute list * nodes) list) =
+  List.filter (fun (attrs,nodes) ->
+    try List.assoc ("",attr) attrs = value
+    with Not_found -> false
+  ) al
+
+let filter_attr attr value al =
+  match filter_attrs attr value al with
+  | [] -> raise Not_found
+  | hd :: _ -> hd
+
+let hd nodes =
+  List.hd nodes
+
+let tl =
+  function
+  | [] -> []
+  | hd::tl -> tl
+
 exception Tag_not_found of string
 
 let members_with_attr tag nodes =
-  List.fold_left (fun a b ->
+  let r = List.fold_left (fun a b ->
     match b with
     | `El (((_,t),attr),c) when t=tag -> (attr,c) :: a
     | _ -> a
-  ) [] nodes
+  ) [] nodes in
+  List.rev r
 
 let member_with_attr tag nodes =
   match members_with_attr tag nodes with
@@ -101,6 +131,16 @@ let members tag nodes =
 
 let member tag nodes =
   snd (member_with_attr tag nodes)
+
+let pick_tags tag cl v nodes =
+  members_with_attr tag nodes
+  |> filter_attrs cl v
+  |> List.map (make_tag tag)
+
+let pick_tag tag cl v nodes =
+  members_with_attr tag nodes
+  |> filter_attr cl v
+  |> make_tag tag
 
 let data_to_string nodes =
   let buf = Buffer.create 512 in

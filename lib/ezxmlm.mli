@@ -53,15 +53,56 @@ val to_channel : out_channel -> Xmlm.dtd -> nodes -> unit
 
 (** Write an XML document to a [string].  This goes via an intermediate
     [Buffer] and so may be slow on large documents. *)
-val to_string : Xmlm.dtd -> nodes -> string
+val to_string : ?dtd:string -> nodes -> string
 
 (** Low-level function to write directly to an [Xmlm] output source *)
 val to_output : Xmlm.output -> Xmlm.dtd * node -> unit
 
+(** {1 Attribute handling} *)
+
+(** Given some selected attributes and nodes (usually from [members_with_attr])
+    return the ones that match the [class] and [value] supplied. *)
+val filter_attrs : string -> string ->
+    (Xmlm.attribute list * nodes) list -> (Xmlm.attribute list * nodes) list
+
+(** Given some selected attributes and nodes (usually from [members_with_attr])
+    return the first that matches the [class] and [value] supplied.
+    Raises [Not_found] if nothing matches. *)
+val filter_attr : string -> string ->
+    (Xmlm.attribute list * nodes) list -> (Xmlm.attribute list * nodes)
+
+(** [mem_attr name value attrs] returns true if the [name] key is
+    with value [value] is present in the [attrs] attribute list. *)
+val mem_attr : string -> string -> Xmlm.attribute list -> bool
+
+(** [get_attr name attrs] returns the value associated with key
+    [name] in the [attrs] attribute list.
+    Raised [Not_found] if the attribute is not present. *)
+val get_attr : string -> Xmlm.attribute list -> string
+
 (** {1 Selectors and utility functions } *)
 
-(** Make a tag given a [tag] name and body [nodes] and an optional attribute list *)
-val mk_tag : ?attrs:(string * string) list -> tag:string -> nodes -> node
+(** [pick_tags tag attr value] selects all the child nodes that
+    match the [tag] name and contain an attribute with name [tag]
+    and [value]. *)
+val pick_tags : string -> string -> string -> nodes -> nodes
+
+(** [pick_tag tag attr value] selects the first child node that
+    matches the [tag] name and contain an attribute with name [tag]
+    and [value].
+    Raises [Not_found] if no such node exists. *)
+val pick_tag : string -> string -> string -> nodes -> node
+
+(** Return the first tag in the list of nodes.
+    Raised [Not_found] if the nodes are empty *)
+val hd : nodes -> node
+
+(** Return all the tags but the first one in a list of nodes.
+    Returns an empty list if the list is empty. *)
+val tl : nodes -> nodes
+
+(** Make a tag given a [tag] name and body attributes and nodes *)
+val make_tag : string -> Xmlm.attribute list * nodes -> node
 
 (** Convert a list of [`Data] fragments to a human-readable string.  Any elements
     within the list are ignored, and multiple [`Data] fragments are concatenated. *)
