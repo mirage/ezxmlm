@@ -125,6 +125,11 @@ let member_with_attr tag nodes =
   match members_with_attr tag nodes with
   | [] -> raise (Tag_not_found tag)
   | hd::_ -> hd
+  
+let has_member tag nodes =
+    match members_with_attr tag nodes with
+  | [] -> false
+  | hd::_ -> true
 
 let members tag nodes =
   List.map snd (members_with_attr tag nodes)

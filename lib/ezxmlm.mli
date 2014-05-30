@@ -127,6 +127,10 @@ val member_with_attr : string -> nodes -> Xmlm.attribute list * nodes
     [member_with_attr] function instead *)
 val member : string -> nodes -> nodes
 
+(** [has_member tag subnodes] returns true if the given  [tag] name is
+    present among the subnodes and false if it can't find it. *)
+val has_member : string -> nodes -> bool
+
 (** Traverses XML nodes and applies [f] to any tags that match the [tag] parameter.
     The result of the transformations is returned as a new set of nodes. *)
 val filter_map : tag:string -> f:(Xmlm.attribute list -> nodes -> nodes) -> nodes -> nodes
