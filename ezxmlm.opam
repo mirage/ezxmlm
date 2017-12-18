@@ -19,4 +19,4 @@ tags: [
 dev-repo: "git://github.com/avsm/ezxmlm"
 homepage: "https://github.com/avsm/ezxmlm"
 bug-reports: "https://github.com/avsm/ezxmlm"
-available: ocaml-version >= "4.01.0"
+available: ocaml-version >= "4.02.3"
