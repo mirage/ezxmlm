@@ -25,9 +25,9 @@ been post-processed into valid XML using `xmllint --html --xmlout`.
 # #require "ezxmlm" ;;
 # open Ezxmlm ;;
 # let (_,xml) = from_channel (open_in "html/variants.html") ;;
-# member "html" x |> member "head" |> member_with_attr "meta" ;;
+# member "html" xml |> member "head" |> member_with_attr "meta" ;;
 - : Xmlm.attribute list * nodes = ([(("", "name"), "generator"); (("", "content"), "DocBook XSL Stylesheets V1.78.1")], [])
-# member "html" x |> member "head" |> member "title" |> data_to_string;;
+# member "html" xml |> member "head" |> member "title" |> data_to_string;;
 - : string = "Chapter 6. Variants"                                                                                                                                                                                                                                                                                          
 ```
 
