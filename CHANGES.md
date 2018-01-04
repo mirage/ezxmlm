@@ -3,6 +3,7 @@
 * Build with jbuilder and release with topkg
   (this also fixes an OCaml 4.06 -safe-string incompatibility with
    the oasis-generated code)
+* Fixes to the ocamldoc markup to be more compliant with odoc.
 
 ## 1.0.1 (03-06-2014):
 
