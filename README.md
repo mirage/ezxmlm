@@ -1,3 +1,5 @@
+## ezxmlm -- combinators to use with xmlm for parsing and selection
+
 An "easy" interface on top of the Xmlm [1] library.  This version provides more
 convenient (but far less flexible) input and output functions that go to and
 from [string] values.  This avoids the need to write signal code, which is
