@@ -59,11 +59,6 @@ let to_string ?dtd doc =
   write_document (`Buffer buf) dtd doc;
   Buffer.contents buf
 
-let make_tag' ?(attrs=[]) ~tag (contents:nodes) : node =
-  let attrs = List.map (fun (k,v) -> ("",k),v) attrs in
-  let tag = ("", tag), attrs in
-  `El (tag, contents)
-
 let make_tag tag (attrs,nodes) : node =
   `El ((("",tag),attrs),nodes)
 
@@ -93,7 +88,7 @@ let rec filter_iter ~tag ~f i =
   ) i
 
 let filter_attrs attr value (al:(Xmlm.attribute list * nodes) list) =
-  List.filter (fun (attrs,nodes) ->
+  List.filter (fun (attrs, _nodes) ->
     try List.assoc ("",attr) attrs = value
     with Not_found -> false
   ) al
@@ -109,7 +104,7 @@ let hd nodes =
 let tl =
   function
   | [] -> []
-  | hd::tl -> tl
+  | _::tl -> tl
 
 exception Tag_not_found of string
 
@@ -129,7 +124,7 @@ let member_with_attr tag nodes =
 let has_member tag nodes =
     match members_with_attr tag nodes with
   | [] -> false
-  | hd::_ -> true
+  | _hd::_ -> true
 
 let members tag nodes =
   List.map snd (members_with_attr tag nodes)
