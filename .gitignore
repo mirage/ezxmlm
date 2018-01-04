@@ -1,4 +1,5 @@
 *.swp
+_opam/
 _build/
 dist/
 *.docdir
