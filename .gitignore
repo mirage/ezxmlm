@@ -7,3 +7,4 @@ dist/
 *.byte
 *.merlin
 *.install
+.DS_Store
