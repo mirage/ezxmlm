@@ -15,16 +15,17 @@
  *
  *)
 
-(** An "easy" interface on top of the [Xmlm] library.  This version provides
-    more convenient (but far less flexible) input and output functions that
-    go to and from [string] values.  This avoids the need to write signal code,
+(** An "easy" interface on top of the [Xmlm] library.
+    
+    This version provides more convenient (but less flexible) input and output
+    functions that go to and from {!string} values.  This avoids the need to write signal code,
     which is useful for quick scripts that manipulate XML.
    
     More advanced users should go straight to the [Xmlm] library and use it
     directly, rather than be saddled with the Ezxmlm interface below.
   *)
 
-(**  {1 Basic types } *)
+(**  {2 Basic types } *)
 
 (** The type of a single XML tag *)
 type node = ('a Xmlm.frag as 'a) Xmlm.frag
@@ -35,7 +36,7 @@ type nodes = node list
 (** Raised by the query combinators *)
 exception Tag_not_found of string
 
-(**  {1 Reading XML values } *)
+(**  {2 Reading XML values } *)
 
 (** Read an XML document from an [in_channel] *)
 val from_channel : in_channel -> Xmlm.dtd * nodes
@@ -46,7 +47,7 @@ val from_string : string -> Xmlm.dtd * nodes
 (** Low-level function to read directly from an [Xmlm] input source *)
 val from_input : Xmlm.input -> Xmlm.dtd * node
 
-(** {1 Writing XML values } *)
+(** {2 Writing XML values } *)
 
 (** Write an XML document to an [out_channel] *)
 val to_channel : out_channel -> Xmlm.dtd -> nodes -> unit
@@ -58,7 +59,7 @@ val to_string : ?dtd:string -> nodes -> string
 (** Low-level function to write directly to an [Xmlm] output source *)
 val to_output : Xmlm.output -> Xmlm.dtd * node -> unit
 
-(** {1 Attribute handling} *)
+(** {2 Attribute handling} *)
 
 (** Given some selected attributes and nodes (usually from [members_with_attr])
     return the ones that match the [class] and [value] supplied. *)
@@ -80,7 +81,7 @@ val mem_attr : string -> string -> Xmlm.attribute list -> bool
     Raised [Not_found] if the attribute is not present. *)
 val get_attr : string -> Xmlm.attribute list -> string
 
-(** {1 Selectors and utility functions } *)
+(** {2 Selectors and utility functions } *)
 
 (** [pick_tags tag attr value] selects all the child nodes that
     match the [tag] name and contain an attribute with name [tag]
