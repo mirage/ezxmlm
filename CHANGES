@@ -1,3 +1,8 @@
+1.0.2 (15-Dec-2017):
+* Build with jbuilder and release with topkg
+  (this also fixes an OCaml 4.06 -safe-string incompatibility with
+   the oasis-generated code)
+
 1.0.1 (03-Jun-2014):
 * Add `has_member` function to test if a tag is present in sub-nodes.
 * Add Travis CI scripts.
