@@ -10,7 +10,7 @@ rather than be saddled with the Ezxmlm interface.  Since the types in this
 library are more specific than Xmlm, it should interoperate just fine with it
 if you decide to switch over.
 
-* Online docs: <https://anil-code.recoil.org/ezxmlm>
+* Online docs: <http://anil-code.recoil.org/ezxmlm>
 * Source Code: <https://github.com/avsm/ezxmlm>
 * Discussion: <https://discuss.ocaml.org> in the Ecosystem category
 * Bugs: <https://github.com/avsm/ezxmlm/issues>
