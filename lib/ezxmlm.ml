@@ -43,20 +43,20 @@ let to_output o t =
   | `Data d -> `Data d in
   Xmlm.output_doc_tree frag o t
 
-let write_document mode dtd doc =
-  let o = Xmlm.make_output ~decl:false mode in
+let write_document mode ?(decl=false) dtd doc =
+  let o = Xmlm.make_output ~decl mode in
   match doc with
   | [] -> ()
   | hd::tl ->
      to_output o (dtd, hd);
      List.iter (fun t -> to_output o (None, t)) tl
 
-let to_channel chan dtd doc =
-  write_document (`Channel chan) dtd doc
+let to_channel chan ?(decl=false) dtd doc =
+  write_document (`Channel chan) ~decl dtd doc
 
-let to_string ?dtd doc =
+let to_string ?(decl=false) ?dtd doc =
   let buf = Buffer.create 512 in
-  write_document (`Buffer buf) dtd doc;
+  write_document (`Buffer buf) ~decl dtd doc;
   Buffer.contents buf
 
 let make_tag tag (attrs,nodes) : node =

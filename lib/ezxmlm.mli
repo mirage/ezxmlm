@@ -50,11 +50,11 @@ val from_input : Xmlm.input -> Xmlm.dtd * node
 (** {2 Writing XML values } *)
 
 (** Write an XML document to an [out_channel] *)
-val to_channel : out_channel -> Xmlm.dtd -> nodes -> unit
+val to_channel : out_channel -> ?decl:bool -> Xmlm.dtd -> nodes -> unit
 
 (** Write an XML document to a [string].  This goes via an intermediate
     [Buffer] and so may be slow on large documents. *)
-val to_string : ?dtd:string -> nodes -> string
+val to_string : ?decl:bool -> ?dtd:string -> nodes -> string
 
 (** Low-level function to write directly to an [Xmlm] output source *)
 val to_output : Xmlm.output -> Xmlm.dtd * node -> unit
