@@ -1,3 +1,5 @@
+* Build with dune and release with dune-release, migrate to OPAM 2 format
+
 ## v1.0.2 (04/01/2018):
 
 * Build with jbuilder and release with topkg
