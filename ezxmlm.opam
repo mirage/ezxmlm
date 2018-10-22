@@ -1,20 +1,18 @@
-opam-version: "1.2"
+opam-version: "2.0"
 maintainer: "anil@recoil.org"
-authors: [ "Anil Madhavapeddy" ]
+authors: "Anil Madhavapeddy"
 license: "ISC"
-
-build: [
-  [ "dune" "subst"] {pinned}
-  [ "dune" "build" "-p" name "-j" jobs ]
-]
-
+tags: ["org:mirage" "org:ocamllabs"]
+homepage: "https://github.com/avsm/ezxmlm"
+doc: "https://avsm.github.io/ezxmlm/"
+bug-reports: "https://github.com/avsm/ezxmlm/issues"
 depends: [
+  "ocaml" {>= "4.02.3"}
   "dune" {build}
   "xmlm" {>= "1.1.0"}
 ]
-tags: [ "org:mirage" "org:ocamllabs" ]
-dev-repo: "https://github.com/avsm/ezxmlm.git"
-homepage: "https://github.com/avsm/ezxmlm"
-bug-reports: "https://github.com/avsm/ezxmlm/issues"
-doc: "https://avsm.github.io/ezxmlm/"
-available: ocaml-version >= "4.02.3"
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+dev-repo: "git+https://github.com/avsm/ezxmlm.git"
