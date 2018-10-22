@@ -37,7 +37,7 @@ REPO=../../mirage/opam-repository
 PACKAGES=$(REPO)/packages
 # until we have https://github.com/ocaml/opam-publish/issues/38
 pkg-%:
-	topkg opam pkg -n $*
+	dune-release opam pkg -n $*
 	mkdir -p $(PACKAGES)/$*
 	cp -r _build/$*.* $(PACKAGES)/$*/
 	cd $(PACKAGES) && git add $*
