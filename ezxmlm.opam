@@ -4,16 +4,17 @@ authors: [ "Anil Madhavapeddy" ]
 license: "ISC"
 
 build: [
-  [ "jbuilder" "subst"] {pinned}
-  [ "jbuilder" "build" "-p" name "-j" jobs ]
+  [ "dune" "subst"] {pinned}
+  [ "dune" "build" "-p" name "-j" jobs ]
 ]
 
 depends: [
-  "jbuilder" {build & >= "1.0+beta9"}
+  "dune" {build}
   "xmlm" {>= "1.1.0"}
 ]
 tags: [ "org:mirage" "org:ocamllabs" ]
 dev-repo: "https://github.com/avsm/ezxmlm.git"
 homepage: "https://github.com/avsm/ezxmlm"
 bug-reports: "https://github.com/avsm/ezxmlm/issues"
+doc: "https://avsm.github.io/ezxmlm/"
 available: ocaml-version >= "4.02.3"

@@ -1,23 +1,28 @@
-.PHONY: build clean test
-
+.PHONY: build
 build:
-	jbuilder build @install --dev
+	dune build @install
 
+.PHONY: test
 test:
-	jbuilder runtest
+	dune runtest --force
 
+.PHONY: install
 install:
-	jbuilder install
+	dune install
 
+.PHONY: uninstall
 uninstall:
-	jbuilder uninstall
+	dune uninstall
 
+.PHONY: clean
 clean:
-	jbuilder clean
+	dune clean
 
+.PHONY: doc
 doc:
-	jbuilder build @doc
+	dune build @doc
 
+.PHONY: publish-doc
 publish-doc: doc
 	rm -rf .gh-pages
 	git clone `git config --get remote.origin.url` .gh-pages --reference .
@@ -30,6 +35,7 @@ publish-doc: doc
 	git -C .gh-pages push origin gh-pages -f
 	rm -rf .gh-pages
 
+.PHONY: test-all
 test-all:
 	sh ./.docker-run.sh
 
