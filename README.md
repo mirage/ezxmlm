@@ -1,6 +1,6 @@
-## ezxmlm -- combinators to use with xmlm for parsing and selection
+## ezxmlm -- combinators for parsing and selection of XML structures
 
-[![Build Status](https://travis-ci.org/avsm/ezxmlm.svg?branch=master)](https://travis-ci.org/avsm/ezxmlm)
+[![Build Status](https://travis-ci.org/mirage/ezxmlm.svg?branch=master)](https://travis-ci.org/mirage/ezxmlm)
 
 An "easy" interface on top of the Xmlm [1] library.  This version provides more
 convenient (but far less flexible) input and output functions that go to and
@@ -12,10 +12,10 @@ rather than be saddled with the Ezxmlm interface.  Since the types in this
 library are more specific than Xmlm, it should interoperate just fine with it
 if you decide to switch over.
 
-* Online docs: <http://anil-code.recoil.org/ezxmlm>
-* Source Code: <https://github.com/avsm/ezxmlm>
+* Online docs: <https://mirage.github.io/ezxmlm>
+* Source Code: <https://github.com/mirage/ezxmlm>
 * Discussion: <https://discuss.ocaml.org> in the Ecosystem category
-* Bugs: <https://github.com/avsm/ezxmlm/issues>
+* Bugs: <https://github.com/mirage/ezxmlm/issues>
 
 # Example
 
