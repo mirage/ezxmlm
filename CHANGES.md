@@ -1,6 +1,6 @@
 ## v1.1.0 (2019-02-02)
 * Automatically install toplevel printer on modern utop (@avsm)
-* Port to dune from jbuilder (@avsm)
+* Port to dune from jbuilder (@avsm and @Leonidas-from-XIV in #9)
 * Port opam metadata to 2.0 format (@avsm)
 * Move to the `mirage/` GitHub organisation (@avsm)
 
