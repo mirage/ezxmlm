@@ -1,3 +1,7 @@
+## v1.1.0 (2019-02-02)
+* Port to dune from jbuilder (@avsm)
+* Port opam metadata to 2.0 format (@avsm)
+
 ## v1.0.2 (04/01/2018):
 
 * Build with jbuilder and release with topkg
