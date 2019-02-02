@@ -1,7 +1,7 @@
 .PHONY: build clean test install uninstall doc
 
 build:
-	dune build @install --dev
+	dune build
 
 test:
 	dune runtest
