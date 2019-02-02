@@ -1,19 +1,23 @@
-## ezxmlm -- combinators to use with xmlm for parsing and selection
+## ezxmlm -- combinators for parsing and selection of XML structures
 
-An "easy" interface on top of the Xmlm [1] library.  This version provides more
-convenient (but far less flexible) input and output functions that go to and
-from [string] values.  This avoids the need to write signal code, which is
-useful for quick scripts that manipulate XML.
+An XML parser and serialisartion library written in pure OCaml.  Values can
+be converted to and from channels or strings, and combinators exist to
+query the XML values.
+
+Ezxmlm is a simpler interface on top of the Xmlm [1] library.  This version
+provides more convenient (but far less flexible) input and output functions
+that go to and from [string] values.  This avoids the need to write signal
+code, which is useful for quick scripts that manipulate XML.
    
 More advanced users should go straight to the Xmlm library and use it directly,
 rather than be saddled with the Ezxmlm interface.  Since the types in this
 library are more specific than Xmlm, it should interoperate just fine with it
 if you decide to switch over.
 
-* Online docs: <http://anil-code.recoil.org/ezxmlm>
-* Source Code: <https://github.com/avsm/ezxmlm>
+* Online docs: <https://mirage.github.io/ezxmlm>
+* Source Code: <https://github.com/mirage/ezxmlm>
 * Discussion: <https://discuss.ocaml.org> in the Ecosystem category
-* Bugs: <https://github.com/avsm/ezxmlm/issues>
+* Bugs: <https://github.com/mirage/ezxmlm/issues>
 
 # Example
 

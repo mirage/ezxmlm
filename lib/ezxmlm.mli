@@ -59,6 +59,10 @@ val to_string : ?dtd:string -> nodes -> string
 (** Low-level function to write directly to an [Xmlm] output source *)
 val to_output : Xmlm.output -> Xmlm.dtd * node -> unit
 
+(** [pp fmt x] will write a string representation of the XML document [x]
+    to the formatter [fmt]. *)
+val pp : Format.formatter -> nodes -> unit [@@ocaml.toplevel_printer]
+
 (** {2 Attribute handling} *)
 
 (** Given some selected attributes and nodes (usually from [members_with_attr])
@@ -91,11 +95,11 @@ val pick_tags : string -> string -> string -> nodes -> nodes
 (** [pick_tag tag attr value] selects the first child node that
     matches the [tag] name and contain an attribute with name [tag]
     and [value].
-    Raises [Not_found] if no such node exists. *)
+    Raises {!Not_found} if no such node exists. *)
 val pick_tag : string -> string -> string -> nodes -> node
 
 (** Return the first tag in the list of nodes.
-    Raised [Not_found] if the nodes are empty *)
+    Raises {!Not_found} if the nodes are empty *)
 val hd : nodes -> node
 
 (** Return all the tags but the first one in a list of nodes.

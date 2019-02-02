@@ -59,6 +59,8 @@ let to_string ?dtd doc =
   write_document (`Buffer buf) dtd doc;
   Buffer.contents buf
 
+let pp fmt doc = Format.pp_print_string fmt (to_string doc)
+
 let make_tag tag (attrs,nodes) : node =
   `El ((("",tag),attrs),nodes)
 
